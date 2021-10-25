@@ -7,24 +7,21 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.phone48.dto.BoardDTO;
-import org.phone48.dto.Criteria;
 import org.phone48.dto.FileDTO;
 import org.phone48.dto.MemberDTO;
 import org.phone48.dto.PaggingVO;
-import org.phone48.dto.Paging;
-import org.phone48.dto.ReviewDTO;
+//import org.phone48.dto.Paging;
 import org.phone48.service.BoardService;
 import org.phone48.service.MemberService;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -32,31 +29,67 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class MainController {
-	
 	private BoardService boardService;
 	private MemberService memberService;
 	public MainController(BoardService boardService, MemberService memberService) {
-		super();
 		this.boardService = boardService;
 		this.memberService = memberService;
 	}
 	@RequestMapping("/")
 	public String main() {
-		return "main";
+		return "index";
 	}
-	
+	//-------------------------------------KANG
+	@RequestMapping("login.do")
+	public String login(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		System.out.println("로그인 컨트롤러 실행");
+		String id = request.getParameter("id");
+		String pass = request.getParameter("pass");
+		// 수정해야 함
+		String nickname = request.getParameter("nickname");
+		MemberDTO dto = memberService.login(id, pass);
+		if (dto == null) {
+			response.setContentType("text/html;charset=utf-8");
+			response.getWriter().write("<script>alert('아이디 비밀번호 확인하세요'); history.back();</script>");
+			return null;
+		} else {
+			System.out.println("dto : " + dto.getId() + " " + dto.getPassword());
+			request.getSession().setAttribute("client", dto.getId());
+			request.getSession().setAttribute("client", dto.getPassword());
+			request.getSession().setAttribute("client", dto.getNickname());
+			return boardMain(request, request.getSession());
+		}
+
+	}
 	@RequestMapping("boardList.do")
 	public String boardMain(HttpServletRequest request, HttpSession session) {
+		System.out.println("보드 리스트 실행");
 		//1. 현재 페이지 번호 - 없으면 페이지 번호 1로 설정
 		String pageNo = request.getParameter("pageNo");
 		int currentPageNo = pageNo == null || pageNo.equals("") ? 1 : Integer.parseInt(pageNo);
-		ArrayList<BoardDTO> list = boardService.selectBoard(currentPageNo);
-		
+		List<BoardDTO> list = boardService.selectBoard(currentPageNo);
+		System.out.println(list.toString());
 		int count = boardService.selectBoardCount();
 		PaggingVO vo = new PaggingVO(count, currentPageNo, 5, 4);
 		request.setAttribute("pagging", vo);
+		request.setAttribute("list", list);
 		return "board/board_list";
 	}
+	
+	@RequestMapping("boardView.do")
+	public String boardView(HttpServletRequest request,HttpSession session) {
+		int bno = Integer.parseInt(request.getParameter("bno"));
+		boardService.addBoardCount(bno);
+		BoardDTO dto = boardService.selectBoardContent(bno);
+		request.setAttribute("board", dto);
+
+		// 파일목록
+		ArrayList<FileDTO> flist = boardService.selectFileList(bno);
+		request.setAttribute("flist", flist);
+
+		return "board/board_view";
+	}
+
 	
 	@RequestMapping("memberUpdateView.do")
 	public String memberUpdateView(HttpSession session) {
@@ -169,56 +202,83 @@ public class MainController {
 			redirectAttributes.addAttribute("bno",bno);
 			return "redirect:/boardView.do";
 		}
+		//-----------------------------------KANG
+		
 		// ----------------------------------CHOI
-		 @RequestMapping("/list") //게시판 리스트 화면 호출  
-		    private String reviewList(Model model) throws Exception{
-		        
-		        model.addAttribute("list", boardService.reviewListService());
-		        
-		        return "list"; 
-		    }
-		    
-		    @RequestMapping("/detail/{rno}") //게시물 상세 페이지
-		    private String boardDetail(@PathVariable int rno, Model model) throws Exception{
-		        model.addAttribute("detail", boardService.reviewDetailService(rno));
-		        return "detail";
-		    }
-
-		    @RequestMapping("/insert") //게시글 작성폼 호출  
-		    private String reviewInsertForm(){
-		        
-		        return "insert";
-		    }
-		    
-		    @RequestMapping("/insertProc") //게시글 작성
-		    private String reviewInsertProc(HttpServletRequest request) throws Exception{
-		        
-		        ReviewDTO board = new ReviewDTO(0, null, null, null, 0);
-		        
-		        board.setReview_content(request.getParameter("content"));
-		        
-		        boardService.reviewInsertService(board);
-		        
-		        return "redirect:/list";
-		    }
-		    
-		    @RequestMapping("/list") //페이징
-		    public String boardList(Criteria cri, Model model) throws Exception {
-		 
-		        // 전체 글 개수
-		        int boardListCnt = boardService.boardListCnt();
-		        
-		        // 페이징 객체
-		        Paging paging = new Paging();
-		        paging.setCri(cri);
-		        paging.setTotalCount(boardListCnt);    
-		        
-		        List<Map<String, Object>> list = boardService.boardList(cri);
-		        
-		        model.addAttribute("list", list);    
-		        model.addAttribute("paging", paging);    
-		                
-		        return "list";
-		    }
-	//---------------------------------------------CHOI
+//		@RequestMapping("/list") //리뷰 리스트 화면 호출  
+//		private String reviewList(Model model) throws Exception{
+//				        
+//			model.addAttribute("list", boardService.reviewListService());
+//				        
+//			return "list"; 
+//		    }
+//				    
+//		@RequestMapping("/detail/{rno}") //리뷰 상세 페이지
+//		private String boardDetail(@PathVariable int rno, Model model) throws Exception{
+//			model.addAttribute("detail", boardService.reviewDetailService(rno));
+//				return "detail";
+//			}
+//
+//		@RequestMapping("/insert") //리뷰 작성폼 호출  
+//		private String reviewInsertForm(){
+//				        
+//			return "insert";
+//			}
+//				    
+//		@RequestMapping("/insertProc") //리뷰 작성
+//		private String reviewInsertProc(HttpServletRequest request) throws Exception{
+//				        
+//			ReviewDTO board = new ReviewDTO(0, null, null, null, 0);
+//				        
+//				board.setReview_content(request.getParameter("content"));
+//				        
+//				boardService.reviewInsertService(board);
+//				        
+//				return "redirect:/list";
+//			}
+//				    
+//		@RequestMapping("/list") //페이징
+//		public String boardList(Criteria cri, Model model) throws Exception {
+//				 
+//			// 전체 글 개수
+//			int boardListCnt = boardService.boardListCnt();
+//				        
+//			// 페이징 객체
+//			Paging paging = new Paging();
+//			paging.setCri(cri);
+//			paging.setTotalCount(boardListCnt);    
+//				        
+//			List<Map<String, Object>> list = boardService.boardList(cri);
+//				        
+//			model.addAttribute("list", list);    
+//			model.addAttribute("paging", paging);    
+//				                
+//			return "list";
+//			}
+		//---------------------------------------------CHOI
+		//---------------------------------------------Lee
+		@RequestMapping("search.do")
+		public String search(HttpServletRequest request, HttpServletResponse response) throws IOException {
+			String kind = request.getParameter("kind");
+			String search = request.getParameter("search");
+		
+			List<MemberDTO> list = memberService.selectMember(kind,search);
+			
+			JSONArray arr = new JSONArray(list);
+			JSONObject obj = new JSONObject();
+			obj.put("result", arr);
+			if(list.size() != 0) {
+				obj.put("code", 200);
+				obj.put("message", "정상적으로 조회되었습니다.");
+			}else {
+				obj.put("code", 500);
+				obj.put("message", "조회된 데이터가 없습니다.");
+				
+			}
+			response.setContentType("text/html;charset=utf-8");
+			response.getWriter().write(obj.toString());
+			
+			return null;
+		}
+		//----------------------------------------------Lee
 }

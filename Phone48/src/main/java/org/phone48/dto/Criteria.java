@@ -1,5 +1,8 @@
 package org.phone48.dto;
 
+import org.apache.ibatis.type.Alias;
+
+@Alias("Criteria")
 public class Criteria {
 		// 특정 페이지 조회를 위한 클래스
 		private int page; // 현재 페이지 번호

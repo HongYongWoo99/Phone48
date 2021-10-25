@@ -265,8 +265,6 @@
         flex-direction: row;
         margin-top: 50px;
     }
-    
-
 </style>
 </head>
 <body>
@@ -300,35 +298,30 @@
         <div class="product">
             <table class="pro_board">
                     <tr>
-                        <th>모델명</th>
-                        <td><input type="text" name="product"></td>
-                    </tr>
-                    <tr>
-                        <th>통신사</th>
+                        <th>브랜드</th>
                         <td>
                         	<select name="chk_info" id="target">
-								<option value="4" <c:if test="${sessionScope.target=='4'}">selected</c:if>>SKT</option>
-								<option value="5" <c:if test="${sessionScope.target=='5'}">selected</c:if>>KT</option>
-								<option value="6" <c:if test="${sessionScope.target=='6'}">selected</c:if>>LG U+</option>
-								<option value="7" <c:if test="${sessionScope.target=='7'}">selected</c:if>>자급제</option>
+								<option value="0">삼성</option>
+								<option value="1">애플</option>
+								<option value="2">LG</option>
+								<option value="3">기타</option>
 							</select>
                         </td>
                     </tr>
                     <tr>
-                        <th>제품상태</th>
+                        <th>모델명</th>
+                        <td><input type="text" name="product"></td>
+                    </tr>
+                    
+                    <tr>
+                        <th>통신사</th>
                         <td>
                         	<select name="chk_info" id="target">
-								<option value="15" <c:if test="${sessionScope.target=='15'}">selected</c:if>>신품(미사용)</option>
-								<option value="16" <c:if test="${sessionScope.target=='16'}">selected</c:if>>상태(상)</option>
-								<option value="17" <c:if test="${sessionScope.target=='17'}">selected</c:if>>상태(중)</option>
-								<option value="18" <c:if test="${sessionScope.target=='18'}">selected</c:if>>상태(하)</option>
-								<option value="19" <c:if test="${sessionScope.target=='19'}">selected</c:if>>확정기변</option>
-								<option value="20" <c:if test="${sessionScope.target=='20'}">selected</c:if>>유심기변</option>
-								<option value="21" <c:if test="${sessionScope.target=='21'}">selected</c:if>>요금할인</option>
-								<option value="22" <c:if test="${sessionScope.target=='22'}">selected</c:if>>보증기간이내</option>
-								<option value="23" <c:if test="${sessionScope.target=='23'}">selected</c:if>>풀박스</option>
-								<option value="24" <c:if test="${sessionScope.target=='24'}">selected</c:if>>일부 누락</option>
-								<option value="25" <c:if test="${sessionScope.target=='25'}">selected</c:if>>단품</option>
+								<option value="4">SKT</option>
+								<option value="5">KT</option>
+								<option value="6">LG U+</option>
+								<option value="7">자급제</option>
+								<option value="8">WIFI,미지원</option>
 							</select>
                         </td>
                     </tr>
@@ -336,39 +329,46 @@
                         <th>제품분류</th>
                         <td>
                         	<select name="chk_info" id="target">
-								<option value="9" <c:if test="${sessionScope.target=='9'}">selected</c:if>>5G</option>
-								<option value="10" <c:if test="${sessionScope.target=='10'}">selected</c:if>>4G</option>
-								<option value="11" <c:if test="${sessionScope.target=='11'}">selected</c:if>>3G</option>
-								<option value="12" <c:if test="${sessionScope.target=='12'}">selected</c:if>>2G</option>
-								<option value="13" <c:if test="${sessionScope.target=='13'}">selected</c:if>>애플OS</option>
-								<option value="14" <c:if test="${sessionScope.target=='14'}">selected</c:if>>안드로이드</option>
+								<option value="9">5G</option>
+								<option value="10">4G</option>
+								<option value="11">3G</option>
+								<option value="12">2G</option>
+								<option value="13">애플OS</option>
+								<option value="14">안드로이드</option>
 							</select>
 						</td>
                     </tr>
                     <tr>
-                        <th>선택약정</th>
+                        <th>제품상태</th>
                         <td>
                         	<select name="chk_info" id="target">
-								<option value="9" <c:if test="${sessionScope.target=='9'}">selected</c:if>>5G</option>
-								<option value="10" <c:if test="${sessionScope.target=='10'}">selected</c:if>>4G</option>
-								<option value="11" <c:if test="${sessionScope.target=='11'}">selected</c:if>>3G</option>
-								<option value="12" <c:if test="${sessionScope.target=='12'}">selected</c:if>>2G</option>
-								<option value="13" <c:if test="${sessionScope.target=='13'}">selected</c:if>>애플OS</option>
-								<option value="14" <c:if test="${sessionScope.target=='14'}">selected</c:if>>안드로이드</option>
+								<option value="15">신품(미사용)</option>
+								<option value="16">상태(상)</option>
+								<option value="17">상태(중)</option>
+								<option value="18">상태(하)</option>
+								<option value="19">확정기변</option>
+								<option value="20">유심기변</option>
+								<option value="21">요금할인</option>
+								<option value="22">보증기간이내</option>
+								<option value="23">풀박스</option>
+								<option value="24">일부 누락</option>
+								<option value="25">단품</option>
 							</select>
                         </td>
                     </tr>
                     <tr class="total">
                         <th>판매금액</th>
-                        <td><input type="hidden" name="total">히든태그</td>
+                        <td><input type="number" name="total">원</td>
                     </tr>
             </table>
         </div>
+        
         <div class="text_write">
+        
             <textarea name="content" id="write" placeholder="내용을 입력하세요."></textarea>
             <label for="file_upload">파일업로드</label>
             <input type="file" name="file_upload" id="file_upload">
-            <button type="button" class="board_upload">글작성</button>
+            <button class="board_upload">글작성</button>
             <button type="submit" class="cancel">취소</button>
         </div>
         </form>
@@ -417,7 +417,6 @@
             <a href="#" class="f_tag">안전거래 등록</a>
     </div>
     <div class = "footer_info">
-
         <div class="footer_write">
             <p>(주)Phone 48</p>
             <p>대표 : 최강류이홍, 사업자등록번호: 111-12-12345</p>
@@ -434,7 +433,6 @@
             <p>1:1상담</p>
         </div>
     </div>
-        
 </footer>
 </body>
 </html>

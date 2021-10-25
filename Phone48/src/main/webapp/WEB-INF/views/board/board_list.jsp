@@ -41,7 +41,7 @@
         /*바디부분*/
         section{
             background-color: #DCF1ED;
-            height: 1220px;
+            height: 1000px;
         }
         .search_bar{
             display: inline-block;
@@ -157,12 +157,9 @@
         .main_board{
             width: 900px;
             height: 670px;
-
-            /*   이 부분 지워야함       */
-            
-            border: 1px solid black;
+			
             position: relative;
-            left: 430px;
+            left: 440px;
             bottom: 700px;
             text-align: center;
         }
@@ -184,7 +181,16 @@
             border-bottom: 1px solid black;
             margin-bottom: 50px;
         }
-
+		.move{
+			text-align : right;
+			border : none;
+		}
+		.move a{
+			background-color: #00C2FF;
+			border: 1px solid #00C2FF;
+			text-decoration: none;
+			color: #FFFFFF;
+		}
         /*푸터부분*/
         footer{
             background-color: #FFFFC9;
@@ -224,8 +230,6 @@
             flex-direction: row;
             margin-top: 50px;
         }
-        
-
     </style>
 </head>
 <body>
@@ -301,7 +305,7 @@
                 </form>
             </div>
         </div>
-		<table>
+		<table class="main_board">
                     <tr>
                         <th>글번호</th>
                         <th>ID</th>
@@ -312,15 +316,14 @@
                     </tr>
         <c:forEach var="board" items="${requestScope.list }">
                     <tr>
-                        <td>${obj.bno }</td>
-                        <td>${obj.id }</td>
-                        <td>${obj.nickname }</td>
-                        <td>${obj.title }</td>
-                        <td>${obj.price }원</td>
-                        <td>${obj.pick }</td>
+                        <td><a href="boardView.do?bno=${board.bno }">${board.bno }</td>
+                        <td><a href="boardView.do?bno=${board.bno }">${board.id }</td>
+                        <td><a href="boardView.do?bno=${board.bno }">${board.nickname }</td>
+                        <td><a href="boardView.do?bno=${board.bno }">${board.title }</td>
+                        <td><a href="boardView.do?bno=${board.bno }">${board.price }원</td>
+                        <td><a href="boardView.do?bno=${board.bno }">${board.pick }</td>
                     </tr>
 		</c:forEach>
-		
 		<tr>
 		<td colspan="7">
 			<c:if test="${requestScope.pagging.priviousPageGroup }">
@@ -342,7 +345,7 @@
 		</td>
 		</tr>
 		<tr>
-		<td colspan="7">
+		<td colspan="7" class="move">
 			<a href="boardWriteView.do">글쓰기</a>
 		</td>
 		</tr>

@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class BoardService {
 	private BoardMapper mapper;
-
+	//---------------------------KANG
 	public BoardService(BoardMapper mapper) {
 		super();
 		this.mapper = mapper;
@@ -57,26 +57,35 @@ public class BoardService {
 	public ArrayList<BoardDTO> selectBoard(int pageNo) {
 		return mapper.selectBoard(pageNo);
 	}
-	
-    // 게시글 목록 --CHOI
-    public List<ReviewDTO> reviewListService() throws Exception{
-        return mapper.reviewList();
-    }
-    // 게시글 상세 --CHOI
-    public ReviewDTO reviewDetailService(int rno) throws Exception {
-    	 return mapper.reviewDetail(rno);
-    }
-    //게시글 작성 --CHOI
-    public int reviewInsertService(ReviewDTO board) throws Exception{
-        return mapper.reviewInsert(board);
-    }
-    // 페이징 --CHOI
-    public int boardListCnt() throws Exception {
-        return mapper.boardListCnt();
-    }
-    // 페이징 --CHOI
-    public List<Map<String, Object>> boardList(Criteria cri) throws Exception {
-        return mapper.boardList(cri);
-    }
 
+	public void addBoardCount(int bno) {
+		mapper.addBoardCount(bno);
+	}
+
+	public ArrayList<FileDTO> selectFileList(int bno) {
+		return mapper.selectFileList(bno);
+	}
+	
+	//---------------------------KANG
+	
+//	// 게시글 목록 --CHOI
+//    public List<ReviewDTO> reviewListService() throws Exception{
+//        return mapper.reviewList();
+//    }
+//    // 게시글 상세 --CHOI
+//    public ReviewDTO reviewDetailService(int rno) throws Exception {
+//    	 return mapper.reviewDetail(rno);
+//    }
+//    //게시글 작성 --CHOI
+//    public int reviewInsertService(ReviewDTO board) throws Exception{
+//        return mapper.reviewInsert(board);
+//    }
+//    // 페이징 --CHOI
+//    public int boardListCnt() throws Exception {
+//        return mapper.boardListCnt();
+//    }
+//    // 페이징 --CHOI
+//    public List<Map<String, Object>> boardList(Criteria cri) throws Exception {
+//        return mapper.boardList(cri);
+//    }
 }

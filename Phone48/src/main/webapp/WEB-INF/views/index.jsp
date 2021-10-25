@@ -11,26 +11,22 @@
 	margin: 0;
 	padding: 0;
 }
-
 body {
 	width: 1440px;
 	height: 1622px;
 	margin: 0 auto;
 }
-
 header {
 	display: flex;
 	flex-direction: row;
 	background-color: #20DBB9;
 }
-
 h1 {
 	color: #ffffff;
 	margin-left: 80px;
 	margin-right: 100px;
 	font-size: 40px;
 }
-
 .h_tag {
 	font-size: 25px;
 	background-color: #17A8AA;
@@ -41,22 +37,18 @@ h1 {
 	border-radius: 15px;
 	text-decoration: none;
 }
-
 /*바디부분*/
 section {
 	background-color: #DCF1ED;
 	height: 1400px;
 }
-
 /*푸터부분*/
 footer {
 	background-color: #FFFFC9;
 }
-
 .footer_tag {
 	text-align: center;
 }
-
 .footer_tag a {
 	margin-left: 50px;
 	margin-right: 60px;
@@ -64,42 +56,35 @@ footer {
 	color: black;
 	font-size: 24px;
 }
-
 .footer_info {
 	display: flex;
 	flex-direction: row;
 	font-size: 24px;
 }
-
 .footer_write {
 	display: flex;
 	flex-direction: column;
 	margin-right: 50px;
 }
-
 .footer_tel {
 	display: flex;
 	flex-direction: column;
 	margin-right: 50px;
 }
-
 .footer_tel .com_tel {
 	font-size: 36px;
 }
-
 .footer_service {
 	display: flex;
 	flex-direction: row;
 	margin-top: 50px;
 }
-
 /**/
 .login_container {
 	margin: 0 auto;
 	display: flex;
 	width: 400px;
 }
-
 .login_h {
 	color: #000000;
 	width: 200px;
@@ -107,7 +92,6 @@ footer {
 	line-height: 104px;
 	text-align: center;
 }
-
 #id {
 	width: 100%;
 	background: #FFFFFF;
@@ -118,7 +102,6 @@ footer {
 	font-size: 20px;
 	margin-bottom: 20px;
 }
-
 #pass {
 	width: 100%;
 	background: #FFFFFF;
@@ -129,7 +112,6 @@ footer {
 	font-size: 20px;
 	margin-bottom: 20px;
 }
-
 #btn_login {
 	width: 100%;
 	height: 80px;
@@ -146,7 +128,6 @@ footer {
 	text-align: center;
 	color: #000000;
 }
-
 .easy_login {
 	margin-top: 20px;
 	font-weight: bold;
@@ -156,7 +137,6 @@ footer {
 	margin-bottom: 10px;
 	text-decoration: none;
 }
-
 .register_bar {
 	width: 400px;
 	height: 57px;
@@ -167,29 +147,27 @@ footer {
 	box-sizing: border-box;
 	text-align: center;
 }
-
 .register_bar a, .register_bar a:link, .register_bar a:visited {
 	color: #000000;
 	text-decoration: none;
 }
-
 td {
 	border: none;
 }
 </style>
 <script type="text/javascript">
-
 </script>
 </head>
 <body>
 	<header>
-		<h1>Phone 48</h1>
+		<h1>Phone 48인덱스</h1>
 		<a href="#" class="h_tag">게시글</a> <a href="#" class="h_tag">리뷰</a> <a
 			href="#" class="h_tag">마이페이지</a> <a href="#" class="h_tag">고객센터</a> <a
 			href="#" class="h_tag">로그아웃</a>
 	</header>
 	<section>
 		<div class="login_container">
+		<form action="login.do">
 			<table>
 				<tr>
 					<td colspan="3">
@@ -197,11 +175,11 @@ td {
 					</td>
 				</tr>
 				<tr>
-					<td colspan="3"><input type="text" id="id"
+					<td colspan="3"><input type="text" id="id" name="id"
 						placeholder="아이디를 입력하세요"></td>
 				</tr>
 				<tr>
-					<td colspan="3"><input type="password" id="pass"
+					<td colspan="3"><input type="password" id="pass" name="pass"
 						placeholder="비밀번호를 입력하세요"></td>
 				</tr>
 				<tr>
@@ -225,6 +203,7 @@ td {
 					<td><a href="#">회원가입</a></td>
 				</tr>
 			</table>
+		</form>
 		</div>
 	</section>
 	<footer>

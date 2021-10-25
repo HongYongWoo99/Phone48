@@ -5,7 +5,9 @@ import java.util.List;
 
 import org.phone48.dto.MemberDTO;
 import org.phone48.mapper.MemberMapper;
+import org.springframework.stereotype.Service;
 
+@Service
 public class MemberService {
 	private MemberMapper mapper;
 
@@ -24,12 +26,11 @@ public class MemberService {
 		map.put("password", password);
 		return mapper.login(map);
 	}
-	
+
 	public List<MemberDTO> selectMember(String kind, String search) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("kind", kind);
 		map.put("search", search);
 		return mapper.selectMember(map);
 	}
-	
 }

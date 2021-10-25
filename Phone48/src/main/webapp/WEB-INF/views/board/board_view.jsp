@@ -265,8 +265,6 @@
         flex-direction: row;
         margin-top: 50px;
     }
-    
-
 </style>
 </head>
 <body>
@@ -291,25 +289,25 @@
             <img src="${requestScope.board_file_list.path }" alt="" name="product_sub3" class="psub3">
         </div>
         <div class="product">
-
             <table class="pro_board">
+                    <tr>
+                    	<th>브랜드</th>
+                        <td>${requestScope.board.stag }</td>
+                    </tr>
                     <tr>
                         <th>모델명</th>
                         <td><input type="text" name="model"></td>
-                    </tr>
-                    <tr>
-                        <td>${requestScope.board.stag }</td>
                     </tr>
                     <tr>
                         <th>통신사</th>
                         <td>${requestScope.board.stag}</td>
                     </tr>
                     <tr>
-                        <th>제품상태</th>
+                        <th>제품분류</th>
                         <td>${requestScope.board.stag }</td>
                     </tr>
                     <tr>
-                        <th>제품분류</th>
+                        <th>제품상태</th>
                         <td>${requestScope.board.stag }</td>
                     </tr>
                     <tr class="total">
@@ -344,11 +342,23 @@
                     <th>등급</th>
                     <td>${requestScope.member.grade }</td>
                     <th>거래수</th>
-                    <td>${requestScope.buy-list.id + requestScope.sell_list.id }</td>
+                    <td>${requestScope.buy_list.id + requestScope.sell_list.id }</td>
                 </tr>
             </table>
         </div>
         <div class="sidebtn">
+        <script type="text/javascript">
+	        var result = confirm("구매하시겠어요?");
+        
+	        if(result)
+	        {
+	            document.write("<h1> ${requestScope.board.tell} </h1>")
+	        }
+	        else
+	        {
+	            location.href = "boardView.do"
+	        }
+        </script>
             <button type="button" class="kakao_btn">카카오로 연락하기</button>
             <button type="button" class="more_product">판매자 다른제품 보기</button>
         </div>
@@ -380,7 +390,6 @@
             <p>1:1상담</p>
         </div>
     </div>
-        
 </footer>
 </body>
 </html>

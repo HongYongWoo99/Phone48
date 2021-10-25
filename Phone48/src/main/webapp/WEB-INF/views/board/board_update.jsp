@@ -292,63 +292,78 @@
         </div>
         <hr>
         <div class="picture">
-            <img src="" alt="" name="product_main" class="pmain">
-            <img src="" alt="" name="product_sub1" class="psub1">
-            <img src="" alt="" name="product_sub2" class="psub2">
-            <img src="" alt="" name="product_sub3" class="psub3">
+            <img src="${requestScope.board_file_list.path }" alt="" name="product_main" class="pmain">
+            <img src="${requestScope.board_file_list.path }" alt="" name="product_sub1" class="psub1">
+            <img src="${requestScope.board_file_list.path }" alt="" name="product_sub2" class="psub2">
+            <img src="${requestScope.board_file_list.path }" alt="" name="product_sub3" class="psub3">
         </div>
         <div class="product">
 
             <table class="pro_board">
                     <tr>
-                        <th>모델명</th>
-                        <td><input type="hidden" name="product">인풋 히든</td>
+                        <th>브랜드</th>
+                        <td>
+                        	<c:if test="">
+                        	<select name="chk_info" id="target">
+								<option value="0" <c:if test="${requestScope.target=='0'}">selected</c:if>>삼성</option>
+								<option value="1" <c:if test="${requestScope.target=='1'}">selected</c:if>>애플</option>
+								<option value="2" <c:if test="${requestScope.target=='2'}">selected</c:if>>LG</option>
+								<option value="3" <c:if test="${requestScope.target=='3'}">selected</c:if>>기타</option>
+							</select>
+                        	</c:if>
+                        </td>
                     </tr>
+                    <tr>
+                        <th>모델명</th>
+                        <td><input type="text" name="product"></td>
+                    </tr>
+                    
                     <tr>
                         <th>통신사</th>
-                        <td><input type="radio" name="chk_info" value="SKT">SKT</td>
-                        <td><input type="radio" name="chk_info" value="KT">KT</td>
-                        <td><input type="radio" name="chk_info" value="LG U+">LG U+</td>
-                        <td><input type="radio" name="chk_info" value="payment">지급제</td>
+                        <td>
+                        	<select name="chk_info" id="target">
+								<option value="4" <c:if test="${requestScope.target=='4'}">selected</c:if>>SKT</option>
+								<option value="5" <c:if test="${requestScope.target=='5'}">selected</c:if>>KT</option>
+								<option value="6" <c:if test="${requestScope.target=='6'}">selected</c:if>>LG U+</option>
+								<option value="7" <c:if test="${requestScope.target=='7'}">selected</c:if>>자급제</option>
+								<option value="8" <c:if test="${requestScope.target=='8'}">selected</c:if>>WIFI,미지원</option>
+							</select>
+                        </td>
                     </tr>
                     <tr>
-                        <th>개통일</th>
-                        <td><input type="hidden" name="open" placeholder="">인풋 히든</td>
+                        <th>제품분류</th>
+                        <td>
+                        	<select name="chk_info" id="target">
+								<option value="9" <c:if test="${requestScope.target=='9'}">selected</c:if>>5G</option>
+								<option value="10" <c:if test="${requestScope.target=='10'}">selected</c:if>>4G</option>
+								<option value="11" <c:if test="${requestScope.target=='11'}">selected</c:if>>3G</option>
+								<option value="12" <c:if test="${requestScope.target=='12'}">selected</c:if>>2G</option>
+								<option value="13" <c:if test="${requestScope.target=='13'}">selected</c:if>>애플OS</option>
+								<option value="14" <c:if test="${requestScope.target=='14'}">selected</c:if>>안드로이드</option>
+							</select>
+						</td>
                     </tr>
                     <tr>
                         <th>제품상태</th>
-                        <td><input type="radio" name="chk_info" value="new">신품</td>
-                        <td><input type="radio" name="chk_info" value="good">상</td>
-                        <td><input type="radio" name="chk_info" value="soso">중</td>
-                        <td><input type="radio" name="chk_info" value="bad">하</td>
-                    </tr>
-                    <tr>
-                        <th>구성품</th>
-                        <td><input type="radio" name="chk_info" value="full">풀박스</td>
-                        <td><input type="radio" name="chk_info" value="missing">일부누락</td>
-                        <td><input type="radio" name="chk_info" value="only">단품</td>
-                    </tr>
-                    <tr>
-                        <th>기변상태</th>
-                        <td><input type="radio" name="chk_info" value="only">확정기변</td>
-                        <td><input type="radio" name="chk_info" value="only">유심기변</td>
-                        <td><input type="radio" name="chk_info" value="only">미확인</td>
-                    </tr>
-                    <tr>
-                        <th>선택약정</th>
-                        <td><input type="radio" name="chk_info" value="only">요금할인</td>
-                        <td><input type="radio" name="chk_info" value="only">약정불가</td>
-                        <td><input type="radio" name="chk_info" value="only">미확인</td>
-                    </tr>
-                    <tr>
-                        <th>보증기간</th>
-                        <td><input type="radio" name="chk_info" value="only">보증가능</td>
-                        <td><input type="radio" name="chk_info" value="only">기간종료</td>
-                        <td><input type="radio" name="chk_info" value="only">미확인</td>
+                        <td>
+                        	<select name="chk_info" id="target">
+								<option value="15" <c:if test="${requestScope.target=='15'}">selected</c:if>>신품(미사용)</option>
+								<option value="16" <c:if test="${requestScope.target=='16'}">selected</c:if>>상태(상)</option>
+								<option value="17" <c:if test="${requestScope.target=='17'}">selected</c:if>>상태(중)</option>
+								<option value="18" <c:if test="${requestScope.target=='18'}">selected</c:if>>상태(하)</option>
+								<option value="19" <c:if test="${requestScope.target=='19'}">selected</c:if>>확정기변</option>
+								<option value="20" <c:if test="${requestScope.target=='20'}">selected</c:if>>유심기변</option>
+								<option value="21" <c:if test="${requestScope.target=='21'}">selected</c:if>>요금할인</option>
+								<option value="22" <c:if test="${requestScope.target=='22'}">selected</c:if>>보증기간이내</option>
+								<option value="23" <c:if test="${requestScope.target=='23'}">selected</c:if>>풀박스</option>
+								<option value="24" <c:if test="${requestScope.target=='24'}">selected</c:if>>일부 누락</option>
+								<option value="25" <c:if test="${requestScope.target=='25'}">selected</c:if>>단품</option>
+							</select>
+                        </td>
                     </tr>
                     <tr class="total">
                         <th>판매금액</th>
-                        <td><input type="hidden" name="total">히든태그</td>
+                        <td><input type="number" name="total" value="${requestScope.board.price }">원</td>
                     </tr>
             </table>
         </div>
