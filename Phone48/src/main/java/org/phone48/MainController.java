@@ -18,6 +18,7 @@ import org.phone48.dto.BoardDTO;
 import org.phone48.dto.FileDTO;
 import org.phone48.dto.MemberDTO;
 import org.phone48.dto.PaggingVO;
+import org.phone48.dto.ReviewDTO;
 //import org.phone48.dto.Paging;
 import org.phone48.service.BoardService;
 import org.phone48.service.MemberService;
@@ -203,59 +204,24 @@ public class MainController {
 			return "redirect:/boardView.do";
 		}
 		//-----------------------------------KANG
-		
 		// ----------------------------------CHOI
-//		@RequestMapping("/list") //리뷰 리스트 화면 호출  
-//		private String reviewList(Model model) throws Exception{
-//				        
-//			model.addAttribute("list", boardService.reviewListService());
-//				        
-//			return "list"; 
-//		    }
-//				    
-//		@RequestMapping("/detail/{rno}") //리뷰 상세 페이지
-//		private String boardDetail(@PathVariable int rno, Model model) throws Exception{
-//			model.addAttribute("detail", boardService.reviewDetailService(rno));
-//				return "detail";
-//			}
-//
-//		@RequestMapping("/insert") //리뷰 작성폼 호출  
-//		private String reviewInsertForm(){
-//				        
-//			return "insert";
-//			}
-//				    
-//		@RequestMapping("/insertProc") //리뷰 작성
-//		private String reviewInsertProc(HttpServletRequest request) throws Exception{
-//				        
-//			ReviewDTO board = new ReviewDTO(0, null, null, null, 0);
-//				        
-//				board.setReview_content(request.getParameter("content"));
-//				        
-//				boardService.reviewInsertService(board);
-//				        
-//				return "redirect:/list";
-//			}
-//				    
-//		@RequestMapping("/list") //페이징
-//		public String boardList(Criteria cri, Model model) throws Exception {
-//				 
-//			// 전체 글 개수
-//			int boardListCnt = boardService.boardListCnt();
-//				        
-//			// 페이징 객체
-//			Paging paging = new Paging();
-//			paging.setCri(cri);
-//			paging.setTotalCount(boardListCnt);    
-//				        
-//			List<Map<String, Object>> list = boardService.boardList(cri);
-//				        
-//			model.addAttribute("list", list);    
-//			model.addAttribute("paging", paging);    
-//				                
-//			return "list";
-//			}
-		//---------------------------------------------CHOI
+		@RequestMapping("reviewList.do") //리뷰 리스트 화면 호출  
+		private String reviewList(HttpServletRequest request, HttpSession session) {
+			String pageNo = request.getParameter("pageNo");
+			int currentPageNo = pageNo == null || pageNo.equals("") ? 1 : Integer.parseInt(pageNo);
+			List<ReviewDTO> list = boardService.selectReview(currentPageNo);
+			int count = boardService.selectReviewCount(); 
+			PaggingVO vo = new PaggingVO(count, currentPageNo, 5, 4);
+			request.setAttribute("pagging", vo);
+			request.setAttribute("list", list);
+			return "review/list"; 
+		    }
+		@RequestMapping("reviewWriteView.do") //리뷰 상세보기
+		public String reviewWriteView() {
+			return "review/review_write";
+		}
+		
+		
 		//---------------------------------------------Lee
 		@RequestMapping("search.do")
 		public String search(HttpServletRequest request, HttpServletResponse response) throws IOException {

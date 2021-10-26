@@ -236,7 +236,7 @@
     <header>
             <h1>Phone 48</h1>
             <a href="#" class="h_tag">게시글</a>
-            <a href="#" class="h_tag">리뷰</a>
+            <a href="reviewList.do" class="h_tag">리뷰</a>
             <a href="#" class="h_tag">마이페이지</a>
             <a href="#" class="h_tag">고객센터</a>
             <a href="#" class="h_tag">로그아웃</a>

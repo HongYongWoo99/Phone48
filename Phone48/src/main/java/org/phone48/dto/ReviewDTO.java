@@ -2,7 +2,7 @@ package org.phone48.dto;
 
 import org.apache.ibatis.type.Alias;
 
-@Alias("reviw")
+@Alias("review")
 public class ReviewDTO {
 	private int rno;
 	private String id;
