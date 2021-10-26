@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.korea.mapper.BoardMapper">
+	<select id="selectBoard" parameterType="int" resultType="board">
+		select * from (select b.*, ceil(rownum/5)  as pageno from 
+		(select * from board_list order by bno desc) b)
+		where pageno = #{pageno}
+	</select>
+	<select id="selectBoardNo" resultType="int">
+		select board_no_seq.nextval from dual
+	</select>
+	<!-- ckeditor에서 보낸 파일 처리 부분 -->
+	<insert id="insertBoard" parameterType="board">
+		insert into board(bno,title,writer,bdate,content,bcount)
+		values(#{bno},#{title},#{writer},sysdate,#{content},0)
+	</insert>
+	<insert id="insertFileInfo" parameterType="file">
+		insert into board_file_list values(file_no_seq.nextval,#{bno},#{writer},#{path},sysdate,#{originFileName})
+	</insert>
+	<!-- ckeditor 처리 끝 -->
+	<insert id="insertFileOne" parameterType="file">
+		insert into board_file_list values(#{fno},0,#{writer},#{path},sysdate,#{fileName})
+	</insert>
+	<select id="selectFileNo" resultType="int">
+		select file_no_seq.nextval from dual
+	</select>
+	
+	<select id="selectBoardContent" parameterType="int" resultType="board">
+		select b.bno, b.title, b.writer, b.bdate, b.content, b.bcount,
+		(select count(*) from BOARD_LIKE bl where b.bno = bl.bno) as blike,
+		(select count(*) from BOARD_hate bh where b.bno = bh.bno) as bhate 
+		from board b where b.bno = #{bno} order by bno desc
+	</select>	
+	<select id="selectFileList" parameterType="int" resultType="file">
+		select * from board_file_list where bno = #{bno}
+	</select>
+	<select id="selectFile" parameterType="int" resultType="file">
+		select * from board_file_list where fno = #{fno}
+	</select>
+	<delete id="deleteBoard" parameterType="int">
+		delete from board where bno = #{bno}
+	</delete>
+	<update id="updateBoard" parameterType="map">
+		update board set title=#{title},content=#{content} where bno = #{bno}
+	</update>
+	<select id="selectBoardCount" resultType="int">
+		select count(*) from board
+	</select>
+	<update id="addBoardCount" parameterType="int">
+		update board set bcount = bcount + 1 where bno = #{bno}
+	</update>
+	<insert id="insertBoardLike" parameterType="map">
+		insert into board_like values(#{bno},#{id})
+	</insert>
+	<delete id="deleteBoardLike" parameterType="map">
+		delete from board_like where bno = #{bno} and id like #{id}
+	</delete>
+	<insert id="insertBoardHate" parameterType="map">
+		insert into board_hate values(#{bno},#{id})
+	</insert>
+	<delete id="deleteBoardHate" parameterType="map">
+		delete from board_hate where bno = #{bno} and id like #{id}
+	</delete>
+	
+</mapper>
+
+
+
+
+
+
