@@ -310,7 +310,7 @@
                         <th>글번호</th>
                         <th>ID</th>
                         <th>닉네임</th>
-                        <th>글내용</th>
+                        <th>제목</th>
                         <th>가격</th>
                         <th>찜보기</th>
                     </tr>

@@ -159,20 +159,20 @@
     .board_upload{
         width: 160px;
         height: 50px;
-        margin-left: 730px;
+        margin-left: 710px;
         background-color: #00C2FF;
         color: white;
         border: 1px solid #00C2FF;
         font-size: 30px;
         position: relative;
-        right: 20px;
+        right: 30px;
         bottom: 75px;
         
     }
     .cancel{
         width: 160px;
         height: 50px;
-        margin-left: 20px;
+        margin-left: 10px;
         background-color: #00C2FF;
         color: white;
         border: 1px solid #00C2FF;
@@ -312,7 +312,6 @@
                         <th>모델명</th>
                         <td><input type="text" name="product"></td>
                     </tr>
-                    
                     <tr>
                         <th>통신사</th>
                         <td>
@@ -362,14 +361,12 @@
                     </tr>
             </table>
         </div>
-        
         <div class="text_write">
-        
             <textarea name="content" id="write" placeholder="내용을 입력하세요."></textarea>
             <label for="file_upload">파일업로드</label>
             <input type="file" name="file_upload" id="file_upload">
             <button class="board_upload">글작성</button>
-            <button type="submit" class="cancel">취소</button>
+            <button type="button" onclick="history.back();" class="cancel">취소</button>
         </div>
         </form>
         <div class="member_info">

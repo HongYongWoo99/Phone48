@@ -317,7 +317,6 @@
                         <th>모델명</th>
                         <td><input type="text" name="product"></td>
                     </tr>
-                    
                     <tr>
                         <th>통신사</th>
                         <td>
@@ -368,11 +367,12 @@
             </table>
         </div>
         <div class="text_write">
-            <textarea name="content" id="write" placeholder="내용을 입력하세요."></textarea>
+            <textarea name="content" id="write">${requestScope.board.content}</textarea>
             <label for="file_upload">파일업로드</label>
             <input type="file" name="file_upload" id="file_upload">
-            <button type="button" class="board_upload">글작성</button>
-            <button type="submit" class="cancel">취소</button>
+            <button class="board_upload">글작성</button>
+            <button type="button" onclick="history.back();" class="cancel">취소</button>
+            <input type="hidden" name="bno" value="${requestScope.board.bno}">
         </div>
             </form>
         <div class="member_info">

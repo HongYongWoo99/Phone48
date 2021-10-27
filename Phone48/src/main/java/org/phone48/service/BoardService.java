@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.phone48.dto.BoardDTO;
-import org.phone48.dto.Criteria;
 import org.phone48.dto.FileDTO;
 import org.phone48.dto.ReviewDTO;
 import org.phone48.mapper.BoardMapper;
@@ -67,6 +66,14 @@ public class BoardService {
 	}
 	
 	//---------------------------KANG
+	//-----------------------------CHOI
+	public List<ReviewDTO> selectReview(int currentPageNo) {
+		return mapper.selectReview(currentPageNo);
+	}
+
+	public int selectReviewCount() {
+		return mapper.selectReviewCount();
+	}
 	
 //	// 게시글 목록 --CHOI
 //    public List<ReviewDTO> reviewListService() throws Exception{

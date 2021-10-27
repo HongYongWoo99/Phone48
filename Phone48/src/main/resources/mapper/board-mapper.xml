@@ -33,6 +33,7 @@
 	<update id="addBoardCount" parameterType="int">
 		update board set bno = bno + 1 
 	</update>	
+<<<<<<< HEAD
  	<!--  리뷰 갯수 -->
     <!-- <select id="boardCount" resultType="board">
         SELECT
@@ -76,4 +77,18 @@
 		        SELECT count(*)
 		        FROM REVIEW
 		</select> -->	
+=======
+	
+ 	<!-- CHOI -->
+	<select id="selectReview" parameterType="int" resultType="review">
+		select * from (select b.*, ceil(rownum/5)  as pageno from 
+		(select * from review order by rno desc) b)
+		where pageno = #{pageno}
+	</select>
+	
+	<select id="selectReviewCount" resultType="int">
+		select count(*) from review
+	</select>
+	
+>>>>>>> b3aff71c807aef5a6dc1b734ab084082381061a7
 </mapper>
