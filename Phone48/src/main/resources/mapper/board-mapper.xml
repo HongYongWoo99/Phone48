@@ -13,7 +13,7 @@
 	</select>
 	<insert id="insertBoard" parameterType="board">
 		insert into board(bno, id, nickname, title, content, price, stag)
-		values(#{bno},#{id},#{nickname},#{title},#{content},#{price},#{pick},#{stag})
+		values(#{bno},#{id},#{title},#{nickname},#{content},#{price},#{pick})
 	</insert>
 	<insert id="insertFileInfo" parameterType="file">
 		insert into board_file_list values(file_no_seq.nextval,#{bno},#{nickname},#{path},#{originFileName})
@@ -33,9 +33,8 @@
 	<update id="addBoardCount" parameterType="int">
 		update board set bno = bno + 1 
 	</update>	
-<<<<<<< HEAD
  	<!--  리뷰 갯수 -->
-    <!-- <select id="boardCount" resultType="board">
+     <!-- <select id="boardCount" resultType="board">
         SELECT
             COUNT(*)
         FROM REVIEW
@@ -76,18 +75,5 @@
 		<select id="boardListCnt" resultType="int">
 		        SELECT count(*)
 		        FROM REVIEW
-		</select> -->	
-=======
-	
- 	<!-- CHOI -->
-	<select id="selectReview" parameterType="int" resultType="review">
-		select * from (select b.*, ceil(rownum/5)  as pageno from 
-		(select * from review order by rno desc) b)
-		where pageno = #{pageno}
-	</select>
-	
-	<select id="selectReviewCount" resultType="int">
-		select count(*) from review
-	</select>
-	
+		</select>	 -->
 </mapper>

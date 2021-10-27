@@ -3,7 +3,6 @@ package org.phone48.mapper;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.phone48.dto.BoardDTO;

@@ -3,7 +3,6 @@ package org.phone48.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.phone48.dto.BoardDTO;
 import org.phone48.dto.FileDTO;

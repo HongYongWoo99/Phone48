@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<<<<<<< HEAD
-=======
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
->>>>>>> b3aff71c807aef5a6dc1b734ab084082381061a7
 <!DOCTYPE html>
 <html>
 <head>
@@ -163,12 +160,9 @@ td {
 </script>
 </head>
 <body>
-<<<<<<< HEAD
-=======
 	<c:if test="${sessionScope.client != null }">
 		<c:redirect url="boardList.do"/>
 	</c:if>
->>>>>>> b3aff71c807aef5a6dc1b734ab084082381061a7
 	<header>
 		<h1>Phone 48인덱스</h1>
 		<a href="#" class="h_tag">게시글</a> <a href="#" class="h_tag">리뷰</a> <a
@@ -240,6 +234,5 @@ td {
 			</div>
 		</div>
 	</footer>
-	<!-- fasdfasdffsdfsdf -->
 </body>
 </html>
