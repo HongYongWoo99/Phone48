@@ -276,15 +276,7 @@ table {
 						placeholder="- 제외하고 입력해주세요"></td>
 					<td colspan="2"></td>
 				</tr>
-				<tr>
-					<td colspan="2" rowspan="2" class="register_txt">주소</td>
-					<td colspan="5"><input type="text" id="address" placeholder=""></td>
-					<td colspan="1"><button id="address_search">주소 검색</button></td>
-				</tr>
-				<tr>
-					<td colspan="6"><input type="text" id="address_detail"
-						placeholder="상세 주소를 입력해주세요"></td>
-				</tr>
+
 				<tr>
 					<td colspan="10">
 						<button id="btn_register">회원가입</button>

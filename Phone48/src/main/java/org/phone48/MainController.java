@@ -11,6 +11,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -42,25 +43,26 @@ public class MainController {
 	}
 	//-------------------------------------KANG
 	@RequestMapping("login.do")
-	public String login(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		System.out.println("로그인 컨트롤러 실행");
+	public String login(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
 		String id = request.getParameter("id");
 		String pass = request.getParameter("pass");
-		// 수정해야 함
-		String nickname = request.getParameter("nickname");
+		
+		if(session.getAttribute("client") == null){
+			id = request.getParameter("id");
+			pass = request.getParameter("pass");
+			if(id.equals("admin") && pass.equals("1234"))
+				return "admin/adminPage";
+		}else {
+			id = ((MemberDTO) session.getAttribute("client")).getId();
+			pass = ((MemberDTO) session.getAttribute("client")).getPassword();
+		}
 		MemberDTO dto = memberService.login(id, pass);
 		if (dto == null) {
 			response.setContentType("text/html;charset=utf-8");
 			response.getWriter().write("<script>alert('아이디 비밀번호 확인하세요'); history.back();</script>");
 			return null;
-		} else {
-			System.out.println("dto : " + dto.getId() + " " + dto.getPassword());
-			request.getSession().setAttribute("client", dto.getId());
-			request.getSession().setAttribute("client", dto.getPassword());
-			request.getSession().setAttribute("client", dto.getNickname());
-			return boardMain(request, request.getSession());
 		}
-
+		return "board/board_list";
 	}
 	@RequestMapping("boardList.do")
 	public String boardMain(HttpServletRequest request, HttpSession session) {
