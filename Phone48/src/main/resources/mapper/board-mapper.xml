@@ -13,7 +13,7 @@
 	</select>
 	<insert id="insertBoard" parameterType="board">
 		insert into board(bno, id, nickname, title, content, price, stag)
-		values(#{bno},#{id},#{title},#{nickname},#{content},#{price},#{pick})
+		values(#{bno},#{id},#{nickname},#{title},#{content},#{price},#{pick},#{stag})
 	</insert>
 	<insert id="insertFileInfo" parameterType="file">
 		insert into board_file_list values(file_no_seq.nextval,#{bno},#{nickname},#{path},#{originFileName})
@@ -90,5 +90,4 @@
 		select count(*) from review
 	</select>
 	
->>>>>>> b3aff71c807aef5a6dc1b734ab084082381061a7
 </mapper>
