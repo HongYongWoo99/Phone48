@@ -135,10 +135,9 @@ footer {
 		<div class="container">
 			<div class="buy_list">
 				<p>
-					현재
-					${requestScope.client.id}
-					님의 구매 완료 내역 :
-					<%=%> <!--buyno 갯수  -->
+					현재 ${requestScope.client.id} 님의 구매 완료 내역 :
+					<%=%>
+					<!--buyno 갯수  -->
 				</p>
 			</div>
 			<div class="txt_container">
@@ -151,13 +150,13 @@ footer {
 						</tr>
 					</thead>
 					<tbody>
-					<c:forEach var="c" items="${requestScope.list }">
-						<tr>
-							<td>${c.buyno }</td>
-							<td>${c.title }</td>
-							<td>${c.price }</td>
-						</tr>
-					</c:forEach>
+						<c:forEach var="c" items="${requestScope.list }">
+							<tr>
+								<td>${c.buyno }</td>
+								<td>${c.title }</td>
+								<td>${c.price }</td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>
