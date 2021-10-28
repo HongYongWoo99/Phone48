@@ -8,10 +8,11 @@ import org.apache.ibatis.type.Alias;
 public class FileDTO {
 	private int fno;
 	private int bno;
-	private String nickname;
+	private String id;
 	private String path;
 	private String originfilename;
 	private String type;
+	private String url;
 
 	public FileDTO() {
 	}
@@ -47,12 +48,12 @@ public class FileDTO {
 		this.bno = bno;
 	}
 
-	public String getNickname() {
-		return nickname;
+	public String getId() {
+		return id;
 	}
 
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getPath() {
@@ -62,11 +63,11 @@ public class FileDTO {
 	public void setPath(String path) {
 		this.path = path;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "FileDTO [fno=" + fno + ", bno=" + bno + ", nickname=" + nickname + ", path=" + path
-				+ ", originfilename=" + originfilename + "]";
+		return "FileDTO [fno=" + fno + ", bno=" + bno + ", id=" + id + ", path=" + path
+				+ ", originfilename=" + originfilename + ", type=" + type + ", url=" + url + "]";
 	}
 
 	public String getOriginfilename() {
@@ -77,5 +78,12 @@ public class FileDTO {
 		this.originfilename = originfilename;
 	} 
 	
+	public String geturl() {
+		return url;
+	}
+	
+	public void seturl(String url) {
+		this.url = url;
+	} 
 	
 }

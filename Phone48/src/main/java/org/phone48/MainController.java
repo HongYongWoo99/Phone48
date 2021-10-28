@@ -1,17 +1,19 @@
 package org.phone48;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -41,12 +43,11 @@ public class MainController {
 	public String main() {
 		return "index";
 	}
-	//-------------------------------------KANG
 	@RequestMapping("login.do")
 	public String login(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
 		String id = request.getParameter("id");
 		String pass = request.getParameter("pass");
-		
+		System.out.println(id + pass);
 		if(session.getAttribute("client") == null){
 			id = request.getParameter("id");
 			pass = request.getParameter("pass");
@@ -61,9 +62,12 @@ public class MainController {
 			response.setContentType("text/html;charset=utf-8");
 			response.getWriter().write("<script>alert('아이디 비밀번호 확인하세요'); history.back();</script>");
 			return null;
+		}else {
+			request.getSession().setAttribute("client", dto);
+			return boardMain(request, request.getSession());
 		}
-		return "board/board_list";
 	}
+	//-------------------------------------KANG
 	@RequestMapping("boardList.do")
 	public String boardMain(HttpServletRequest request, HttpSession session) {
 		System.out.println("보드 리스트 실행");
@@ -126,16 +130,26 @@ public class MainController {
 	@RequestMapping("boardWrite.do")
 	public String boardWrite(MultipartHttpServletRequest request, HttpSession session)
 			throws UnsupportedEncodingException {
-
+			
+		String imageURL = request.getParameter("picture");
+		
+		String id = ((MemberDTO) session.getAttribute("client")).getId();
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
-		String nickname = ((MemberDTO) session.getAttribute("client")).getNickname();
-		int bno = boardService.insertBoard(new BoardDTO(0, null, nickname, 0, title, content, 0, '0'));//오라클에 char(1), dto boolean으로 설정
+		int price = Integer.parseInt(request.getParameter("price"));
+		String model = request.getParameter("model");
+		int btag = Integer.parseInt(request.getParameter("btag"));
+		int atag = Integer.parseInt(request.getParameter("atag"));
+		int ctag = Integer.parseInt(request.getParameter("ctag"));
+		int ptag = Integer.parseInt(request.getParameter("ptag"));
+
+		int bno = boardService.insertBoard(new BoardDTO(0, id, null, 0, title, content, price, '0', model, btag, atag, ctag, ptag, 0));//오라클에 char(1), dto boolean으로 설정
+		
 		// 업로드한 파일 목록
 		System.out.println(request.getParameterMap());
 		List<MultipartFile> fileList = request.getFiles("file");
 		System.out.println(fileList.size());
-		String path = "c:\\fileupload\\" + nickname + "\\";
+		String path = "c:\\fileupload\\" + id + "\\";
 		ArrayList<FileDTO> flist = new ArrayList<FileDTO>();
 		int i = 1;
 		for (MultipartFile mf : fileList) {
@@ -148,7 +162,7 @@ public class MainController {
 			SimpleDateFormat format = new SimpleDateFormat("yyyy_MM_dd_hh_mm_ss");
 			int idx = originalFileName.lastIndexOf(".");
 			// 실제 저장할 파일 경로
-			String saveName = format.format(Calendar.getInstance().getTime()) + "_" + nickname + "_" + i + "."
+			String saveName = format.format(Calendar.getInstance().getTime()) + "_" + id + "_" + i + "."
 					+ originalFileName.substring(idx + 1);
 			i++;
 			String saveFile = path + saveName;
@@ -157,7 +171,7 @@ public class MainController {
 			FileDTO dto = new FileDTO(f);
 			dto.setOriginfilename(originalFileName);
 			dto.setBno(bno);
-			dto.setNickname(nickname);
+			dto.setId(id);
 			flist.add(dto);
 			System.out.println(dto.toString());
 			try {
@@ -173,6 +187,24 @@ public class MainController {
 			}
 
 		}
+		
+		try {
+			URL imgURL = new URL(imageURL);
+			String extension = imageURL.substring(imageURL.lastIndexOf(".")+1); // 확장자
+			String fileName = "나를_업로드_해봐"; // 이미지 이름
+			
+			BufferedImage image = ImageIO.read(imgURL);
+			File file = new File("resource/" + fileName + "." + extension);
+			if(!file.exists()) { // 해당 경로의 폴더가 존재하지 않을 경우
+				file.mkdirs(); // 해당 경로의 폴더 생성
+			}
+			
+			ImageIO.write(image, extension, file); // image를 file로 업로드
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	
+		
 		boardService.insertFileList(flist);
 
 		return "redirect:boardList.do";

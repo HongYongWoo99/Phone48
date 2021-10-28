@@ -12,12 +12,18 @@ public class BoardDTO {
 	private String content;
 	private int price;
 	private char pick;
+	private String model;
+	private int btag;
+	private int atag;
+	private int ctag;
+	private int ptag;
+	private int rtag;
 	
 	public BoardDTO() {
 	}
 
-	public BoardDTO(int bno, String id, String nickname, int trade, String title, String content, int price,
-			char pick) {
+	public BoardDTO(int bno, String id, String nickname, int trade, String title, String content, int price, char pick,
+			String model, int btag, int atag, int ctag, int ptag, int rtag) {
 		super();
 		this.bno = bno;
 		this.id = id;
@@ -27,6 +33,12 @@ public class BoardDTO {
 		this.content = content;
 		this.price = price;
 		this.pick = pick;
+		this.model = model;
+		this.btag = btag;
+		this.atag = atag;
+		this.ctag = ctag;
+		this.ptag = ptag;
+		this.rtag = rtag;
 	}
 
 	public int getBno() {
@@ -93,13 +105,61 @@ public class BoardDTO {
 		this.pick = pick;
 	}
 
+	public String getModel() {
+		return model;
+	}
+
+	public void setModel(String model) {
+		this.model = model;
+	}
+
+	public int getBtag() {
+		return btag;
+	}
+
+	public void setBtag(int btag) {
+		this.btag = btag;
+	}
+
+	public int getAtag() {
+		return atag;
+	}
+
+	public void setAtag(int atag) {
+		this.atag = atag;
+	}
+
+	public int getCtag() {
+		return ctag;
+	}
+
+	public void setCtag(int ctag) {
+		this.ctag = ctag;
+	}
+
+	public int getPtag() {
+		return ptag;
+	}
+
+	public void setPtag(int ptag) {
+		this.ptag = ptag;
+	}
+
+	public int getRtag() {
+		return rtag;
+	}
+
+	public void setRtag(int rtag) {
+		this.rtag = rtag;
+	}
+
 	@Override
 	public String toString() {
 		return "BoardDTO [bno=" + bno + ", id=" + id + ", nickname=" + nickname + ", trade=" + trade + ", title="
-				+ title + ", content=" + content + ", price=" + price + ", pick=" + pick + "]";
+				+ title + ", content=" + content + ", price=" + price + ", pick=" + pick + ", model=" + model
+				+ ", btag=" + btag + ", atag=" + atag + ", ctag=" + ctag + ", ptag=" + ptag + ", rtag=" + rtag + "]";
 	}
 
-
-
+	
 	
 }
