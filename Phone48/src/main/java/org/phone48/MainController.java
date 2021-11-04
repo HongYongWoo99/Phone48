@@ -39,7 +39,7 @@ public class MainController {
 	}
 	@RequestMapping("/")
 	public String main() {
-		return "member_update";
+		return "index";
 	}
 	
 	@RequestMapping("login.do")
@@ -126,60 +126,60 @@ public class MainController {
 		return "board/board_write";
 	}
 
-//	@RequestMapping("boardWrite.do")
-//	public String boardWrite(MultipartHttpServletRequest request, HttpSession session)
-//			throws UnsupportedEncodingException {
-//
-//		String title = request.getParameter("title");
-//		String content = request.getParameter("content");
-//		String nickname = ((MemberDTO) session.getAttribute("client")).getNickname();
-//		int bno = boardService.insertBoard(new BoardDTO(0, null, nickname, 0, title, content, 0, '0'));//오라클에 char(1), dto boolean으로 설정
-//		// 업로드한 파일 목록
-//		System.out.println(request.getParameterMap());
-//		List<MultipartFile> fileList = request.getFiles("file");
-//		System.out.println(fileList.size());
-//		String path = "c:\\fileupload\\" + nickname + "\\";
-//		ArrayList<FileDTO> flist = new ArrayList<FileDTO>();
-//		int i = 1;
-//		for (MultipartFile mf : fileList) {
-//			// 원본 파일명
-//			String originalFileName = mf.getOriginalFilename();
-//			long fileSize = mf.getSize();
-//			if (fileSize == 0)
-//				continue;
-//			// 저장할 파일 경로 완성
-//			SimpleDateFormat format = new SimpleDateFormat("yyyy_MM_dd_hh_mm_ss");
-//			int idx = originalFileName.lastIndexOf(".");
-//			// 실제 저장할 파일 경로
-//			String saveName = format.format(Calendar.getInstance().getTime()) + "_" + nickname + "_" + i + "."
-//					+ originalFileName.substring(idx + 1);
-//			i++;
-//			String saveFile = path + saveName;
-//			System.out.println(saveFile);
-//			File f = new File(saveFile);
-//			FileDTO dto = new FileDTO(f);
-//			dto.setOriginfilename(originalFileName);
-//			dto.setBno(bno);
-//			dto.setNickname(nickname);
-//			flist.add(dto);
-//			System.out.println(dto.toString());
-//			try {
-//				// 파일 업로드
-//				File parentPath = new File(path);
-//				if (!parentPath.exists())
-//					parentPath.mkdirs();
-//				mf.transferTo(f);
-//			} catch (IllegalStateException e) {
-//				e.printStackTrace();
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//
-//		}
-//		boardService.insertFileList(flist);
-//
-//		return "redirect:boardList.do";
-//	}
+	@RequestMapping("boardWrite.do")
+	public String boardWrite(MultipartHttpServletRequest request, HttpSession session)
+			throws UnsupportedEncodingException {
+
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		String nickname = ((MemberDTO) session.getAttribute("client")).getNickname();
+		int bno = boardService.insertBoard(new BoardDTO(0, null, nickname, 0, title, content, 0, '0'));//오라클에 char(1), dto boolean으로 설정
+		// 업로드한 파일 목록
+		System.out.println(request.getParameterMap());
+		List<MultipartFile> fileList = request.getFiles("file");
+		System.out.println(fileList.size());
+		String path = "c:\\fileupload\\" + nickname + "\\";
+		ArrayList<FileDTO> flist = new ArrayList<FileDTO>();
+		int i = 1;
+		for (MultipartFile mf : fileList) {
+			// 원본 파일명
+			String originalFileName = mf.getOriginalFilename();
+			long fileSize = mf.getSize();
+			if (fileSize == 0)
+				continue;
+			// 저장할 파일 경로 완성
+			SimpleDateFormat format = new SimpleDateFormat("yyyy_MM_dd_hh_mm_ss");
+			int idx = originalFileName.lastIndexOf(".");
+			// 실제 저장할 파일 경로
+			String saveName = format.format(Calendar.getInstance().getTime()) + "_" + nickname + "_" + i + "."
+					+ originalFileName.substring(idx + 1);
+			i++;
+			String saveFile = path + saveName;
+			System.out.println(saveFile);
+			File f = new File(saveFile);
+			FileDTO dto = new FileDTO(f);
+			dto.setOriginfilename(originalFileName);
+			dto.setBno(bno);
+			dto.setNickname(nickname);
+			flist.add(dto);
+			System.out.println(dto.toString());
+			try {
+				// 파일 업로드
+				File parentPath = new File(path);
+				if (!parentPath.exists())
+					parentPath.mkdirs();
+				mf.transferTo(f);
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+		}
+		boardService.insertFileList(flist);
+
+		return "redirect:boardList.do";
+	}
 	
 	//게시글 삭제
 		@RequestMapping("boardDelete.do")
