@@ -84,6 +84,7 @@ public class FileDTO {
 	
 	public void seturl(String url) {
 		this.url = url;
-	} 
+	}
+
 	
 }

@@ -3,6 +3,7 @@ package org.phone48.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.phone48.dto.BoardDTO;
 import org.phone48.dto.FileDTO;
@@ -66,32 +67,52 @@ public class BoardService {
 	
 	//---------------------------KANG
 	//-----------------------------CHOI
-	public List<ReviewDTO> selectReview(int currentPageNo) {
-		return mapper.selectReview(currentPageNo);
-	}
-
-	public int selectReviewCount() {
-		return mapper.selectReviewCount();
-	}
 	
-//	// 게시글 목록 --CHOI
-//    public List<ReviewDTO> reviewListService() throws Exception{
-//        return mapper.reviewList();
-//    }
-//    // 게시글 상세 --CHOI
-//    public ReviewDTO reviewDetailService(int rno) throws Exception {
-//    	 return mapper.reviewDetail(rno);
-//    }
-//    //게시글 작성 --CHOI
-//    public int reviewInsertService(ReviewDTO board) throws Exception{
-//        return mapper.reviewInsert(board);
-//    }
-//    // 페이징 --CHOI
-//    public int boardListCnt() throws Exception {
-//        return mapper.boardListCnt();
-//    }
-//    // 페이징 --CHOI
-//    public List<Map<String, Object>> boardList(Criteria cri) throws Exception {
-//        return mapper.boardList(cri);
-//    }
+		// 리뷰 페이징
+		public List<ReviewDTO> selectReview(int currentPageNo) {
+			return mapper.selectReview(currentPageNo);
+		}
+		// 리뷰 페이징
+		public int selectReviewCount() {
+			return mapper.selectReviewCount();
+		}
+		// 리뷰 글쓰기
+		public int insertReview(ReviewDTO dto) {
+		int rno = mapper.selectReviewNo();
+		dto.setRno(rno);
+		mapper.insertReview(dto);
+		return rno;
+		}
+		
+		// 리뷰 상세 -
+	    public ReviewDTO reviewDetailService(int rno)  {
+	    	 return mapper.reviewDetail(rno);
+	    }
+	    
+		// 리뷰 페이징
+	    public Map<String,Object> reviewSum() {
+	    	return mapper.reviewSum();
+	    }
+
+	    // 리뷰 상세 
+		public void updateReview(int rno, String title, String review_content, int review_point) {
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("rno", rno);
+			map.put("title", title);
+			map.put("review_content", review_content);
+			map.put("review_point", review_point);
+			mapper.updateReview(map);
+			
+		}
+		
+		// 리뷰 수정
+		public ReviewDTO selectReviewContent(int rno) {
+			return mapper.selectReviewContent(rno);
+		}
+		// 리뷰 삭제
+		public void deleteReview(int rno) {
+			mapper.deleteReview(rno);
+			
+		}
+		//-----------------------------CHOI
 }

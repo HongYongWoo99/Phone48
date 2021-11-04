@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,7 +25,9 @@ import org.phone48.dto.ReviewDTO;
 import org.phone48.service.BoardService;
 import org.phone48.service.MemberService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -133,7 +136,7 @@ public class MainController {
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		String nickname = ((MemberDTO) session.getAttribute("client")).getNickname();
-		int bno = boardService.insertBoard(new BoardDTO(0, null, nickname, 0, title, content, 0, '0'));//오라클에 char(1), dto boolean으로 설정
+		int bno = boardService.insertBoard(new BoardDTO(0, null, nickname, 0, title, content, 0, '0',  bno, bno, bno, bno, bno));//오라클에 char(1), dto boolean으로 설정
 		// 업로드한 파일 목록
 		System.out.println(request.getParameterMap());
 		List<MultipartFile> fileList = request.getFiles("file");
@@ -210,23 +213,96 @@ public class MainController {
 		}
 		//-----------------------------------KANG
 		// ----------------------------------CHOI
-		@RequestMapping("reviewList.do") //리뷰 리스트 화면 호출  
-		private String reviewList(HttpServletRequest request, HttpSession session) {
-			String pageNo = request.getParameter("pageNo");
-			int currentPageNo = pageNo == null || pageNo.equals("") ? 1 : Integer.parseInt(pageNo);
-			List<ReviewDTO> list = boardService.selectReview(currentPageNo);
-			int count = boardService.selectReviewCount(); 
-			PaggingVO vo = new PaggingVO(count, currentPageNo, 5, 4);
-			request.setAttribute("pagging", vo);
-			request.setAttribute("list", list);
-			return "review/list"; 
-		    }
-		@RequestMapping("reviewWriteView.do") //리뷰 상세보기
-		public String reviewWriteView() {
-			return "review/review_write";
-		}
 		
-		
+				//리뷰 리스트 화면 호출  
+				@RequestMapping("reviewList.do") 
+				private String reviewList(HttpServletRequest request, HttpSession session) {
+					String pageNo = request.getParameter("pageNo");
+					Integer reviewPoint = null;
+					int currentPageNo = pageNo == null || pageNo.equals("") ? 1 : Integer.parseInt(pageNo);
+					List<ReviewDTO> list = boardService.selectReview(currentPageNo);
+					for(ReviewDTO reviewDTO: list) {
+						MemberDTO memberDTO = (MemberDTO)session.getAttribute("client");
+						memberDTO.getId();
+						if(reviewDTO.getId().equals(memberDTO.getId())){
+							reviewPoint = reviewDTO.getReview_point();
+							break;
+						}
+					}
+					Map<String, Object> map = boardService.reviewSum();
+					int count = boardService.selectReviewCount(); 
+					PaggingVO vo = new PaggingVO(count, currentPageNo, 5, 4);
+					request.setAttribute("pagging", vo);
+					request.setAttribute("list", list);
+					request.setAttribute("client", session.getAttribute("client"));
+					request.setAttribute("reviewPoint", reviewPoint);
+					request.setAttribute("totalPoint", map.get("TOTAL_POINT"));
+					return "review/list"; 
+				    }
+				
+				//리뷰 상세보기
+				@RequestMapping("reviewView.do") 
+				public String reviewView(@RequestParam("rno") int rno, Model model) {
+					
+					model.addAttribute("detail", boardService.reviewDetailService(rno));
+					return "review/detail";
+				}
+				
+				//리뷰 글쓰기 페이지로 이동
+				@RequestMapping("reviewWriteView.do") 
+				public String reviewWriteView() {
+					return "review/review_write";
+				}
+				
+				//리뷰 글쓰기
+				@RequestMapping("reviewWrite.do")
+				public String reviewWrite(HttpServletRequest request, HttpSession session)
+						throws Exception {
+					
+					String id = ((MemberDTO) session.getAttribute("client")).getId();
+					String nickname = ((MemberDTO) session.getAttribute("client")).getNickname();
+					String review_content = request.getParameter("review_content");
+					int review_point = Integer.parseInt(request.getParameter("review_point"));
+					String title = request.getParameter("title");
+					int rno = boardService.insertReview(new ReviewDTO(0, id, nickname, review_content, review_point, title));
+					System.out.println(request.getParameterMap());
+					
+					return "redirect:reviewList.do";
+				}
+				//리뷰 수정 페이지로 이동
+				@RequestMapping("reviewUpdateView.do")
+				public String reviewUpdateView(HttpServletRequest request) {
+					int rno = Integer.parseInt(request.getParameter("rno"));
+					ReviewDTO dto = boardService.selectReviewContent(rno);
+					request.setAttribute("review", dto);
+					
+					return "review/update_detail";
+				}
+				//리뷰 수정
+				@RequestMapping("reviewUpdate.do")
+				public String reviewUpdate(HttpServletRequest request, RedirectAttributes redirectAttributes) {
+					int rno = Integer.parseInt(request.getParameter("rno"));
+					String title = request.getParameter("title");
+					String review_content = request.getParameter("review_content");
+					int review_point = Integer.parseInt(request.getParameter("review_point"));
+					
+					boardService.updateReview(rno, title, review_content,review_point);
+					redirectAttributes.addAttribute("rno",rno);
+					return "redirect:/reviewView.do";
+				}
+				
+				//리뷰 삭제
+				@RequestMapping("reviewDelete.do")
+				public String reviewDelete(HttpServletRequest request) {
+					int rno = Integer.parseInt(request.getParameter("rno"));
+					boardService.deleteReview(rno);
+					return "redirect:reviewList.do";
+				}
+				@RequestMapping("myPage.do")
+				public String myPage() {
+					return "MyPage";
+				}
+				//---------------------------------------------CHOI
 		//---------------------------------------------Lee
 		@RequestMapping("search.do")
 		public String search(HttpServletRequest request, HttpServletResponse response) throws IOException {

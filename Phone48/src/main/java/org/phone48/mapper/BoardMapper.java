@@ -3,6 +3,7 @@ package org.phone48.mapper;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.phone48.dto.BoardDTO;
@@ -40,5 +41,18 @@ public interface BoardMapper {
 		int selectReviewCount();
 
 		int selectReviewNo();
+
+		int insertReview(ReviewDTO dto);
+
+		public ReviewDTO reviewDetail(int rno);
+
+		Map<String, Object> reviewSum();
+
+		int updateReview(HashMap<String, Object> map);
+
+		ReviewDTO selectReviewContent(int rno);
+
+		int deleteReview(int rno);
+		//----------------------CHOI
 		
 }
