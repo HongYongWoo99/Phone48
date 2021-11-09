@@ -136,8 +136,7 @@ footer {
 			<div class="buy_list">
 				<p>
 					현재 ${requestScope.client.id} 님의 구매 완료 내역 :
-					<%=%>
-					<!--buyno 갯수  -->
+					<!-- 안나와서 코드 지움 -->
 				</p>
 			</div>
 			<div class="txt_container">
