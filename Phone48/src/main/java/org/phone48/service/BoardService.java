@@ -115,4 +115,8 @@ public class BoardService {
 			
 		}
 		//-----------------------------CHOI
+
+		public BoardDTO boardDetailService(int bno) {
+			 return mapper.boardDetail(bno);
+		}
 }

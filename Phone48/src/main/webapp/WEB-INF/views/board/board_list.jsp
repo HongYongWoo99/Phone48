@@ -414,16 +414,14 @@ footer {
 				<th>닉네임</th>
 				<th>제목</th>
 				<th>가격</th>
-				<th>찜보기</th>
 			</tr>
 			<c:forEach var="board" items="${requestScope.list }">
 				<tr>
-					<td><a href="boardView.do?bno=${board.bno }">${board.bno }</td>
-					<td><a href="boardView.do?bno=${board.bno }">${board.id }</td>
-					<td><a href="boardView.do?bno=${board.bno }">${board.nickname }</td>
+					<td>${board.bno }</td>
+					<td>${board.id }</td>
+					<td>${board.nickname }</td>
 					<td><a href="boardView.do?bno=${board.bno }">${board.title }</td>
-					<td><a href="boardView.do?bno=${board.bno }">${board.price }원</td>
-					<td><a href="boardView.do?bno=${board.bno }">${board.pick }</td>
+					<td>${board.price }원</td>
 				</tr>
 			</c:forEach>
 			<tr>

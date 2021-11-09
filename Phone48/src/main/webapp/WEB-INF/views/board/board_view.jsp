@@ -304,56 +304,57 @@ footer {
 <body>
 	<header>
 		<h1>Phone 48</h1>
-		<a href="#" class="h_tag">게시글</a> <a href="#" class="h_tag">리뷰</a> <a
+		<a href="#" class="h_tag">게시글</a> <a href=""reviewList.do"" class="h_tag">리뷰</a> <a
 			href="#" class="h_tag">마이페이지</a> <a href="#" class="h_tag">고객센터</a> <a
 			href="#" class="h_tag">로그아웃</a>
 	</header>
 	<section>
 		<article>
 			<div class="title_tag">
-				<p>${requestScope.board.title }</p>
+				<p>${bdetail.title }</p>
 			</div>
 			<hr>
 			<div class="picture">
-				<img src="${requestScope.board_file_list.path }" alt=""
+				<img src="" alt=""
 					name="product_main" class="pmain"> <img
-					src="${requestScope.board_file_list.path }" alt=""
+					src="" alt=""
 					name="product_sub1" class="psub1"> <img
-					src="${requestScope.board_file_list.path }" alt=""
+					src="" alt=""
 					name="product_sub2" class="psub2"> <img
-					src="${requestScope.board_file_list.path }" alt=""
+					src="" alt=""
 					name="product_sub3" class="psub3">
 			</div>
 			<div class="product">
 				<table class="pro_board">
 					<tr>
 						<th>브랜드</th>
-						<td>${requestScope.board.stag }</td>
+						<td>${bdetail.btag }</td>
 					</tr>
 					<tr>
 						<th>모델명</th>
-						<td><input type="text" name="model"></td>
+						<td>${bdetail.model }</td>
 					</tr>
 					<tr>
 						<th>통신사</th>
-						<td>${requestScope.board.stag}</td>
+						<td>${bdetail.atag }</td>
 					</tr>
 					<tr>
 						<th>제품분류</th>
-						<td>${requestScope.board.stag }</td>
+						<td>${bdetail.ctag }</td>
 					</tr>
 					<tr>
 						<th>제품상태</th>
-						<td>${requestScope.board.stag }</td>
+						<td>${bdetail.ptag }</td>
 					</tr>
 					<tr class="total">
 						<th>판매금액</th>
-						<td>${requestScope.board.price }</td>
+						<td>${bdetail.price }</td>
 					</tr>
 				</table>
 			</div>
+			
 			<div class="text_write">
-				${requestScope.board.content }
+				${bdetail.content }
 				<c:if test="${requestScope.board.id == sessionScope.client.id }">
 					<button type="button" class="btnUpdate">수정</button>
 					<button type="submit" class="btnDelete">삭제</button>
@@ -374,14 +375,15 @@ footer {
 				<table class="minfo">
 					<tr>
 						<th>아이디</th>
-						<td>${requestScope.member.id }</td>
+						<td>${client.id }</td>
 						<th>등급</th>
-						<td>${requestScope.member.grade }</td>
+						<td>${client.grade }</td>
 						<th>거래수</th>
 						<td>${requestScope.buy_list.id + requestScope.sell_list.id }</td>
 					</tr>
 				</table>
 			</div>
+			
 			<div class="sidebtn">
 				<script type="text/javascript">
 					var result = confirm("구매하시겠어요?");

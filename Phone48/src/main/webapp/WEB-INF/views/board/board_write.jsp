@@ -198,6 +198,11 @@
     .minfo{
         border-collapse: collapse;
     }
+    #id{
+    	width : 150px;
+    	font-weight: bold;
+    	padding-left: 35px;
+    }
     .memberinfo tr,th,td{
         font-size: 18px;
         padding-top: 15px;
@@ -271,7 +276,7 @@
 <header>
         <h1>Phone 48</h1>
         <a href="#" class="h_tag">게시글</a>
-        <a href="#" class="h_tag">리뷰</a>
+        <a href="reviewList.do" class="h_tag">리뷰</a>
         <a href="#" class="h_tag">마이페이지</a>
         <a href="#" class="h_tag">고객센터</a>
         <a href="#" class="h_tag">로그아웃</a>
@@ -285,16 +290,16 @@
     		</script>
     	</c:if> 
         <form action="boardWrite.do" method="post" enctype="multipart/form-data">
-        <div class="title_tag">
-            <input type="text" name="title" placeholder="제목을 입력하세요" class="title_name" value="${requestScope.board.title }">
+         <div class="title_tag">
+            <input type="text" name="title" id="title" placeholder="제목을 입력하세요" class="title_name">
         </div>
         <hr>
         <div class="picture" name="picture">
             
-            <img src="${requestScope.board_file_list.url }" alt="" name="product_main" class="pmain">
-            <img src="${requestScope.board_file_list.url }" alt="" name="product_sub1" class="psub1">
-            <img src="${requestScope.board_file_list.url }" alt="" name="product_sub2" class="psub2">
-            <img src="${requestScope.board_file_list.url }" alt="" name="product_sub3" class="psub3">
+            <img src="" alt="" name="product_main" class="pmain">
+            <img src="" alt="" name="product_sub1" class="psub1">
+            <img src="" alt="" name="product_sub2" class="psub2">
+            <img src="" alt="" name="product_sub3" class="psub3">
             
         </div>
         <div class="product">
@@ -302,64 +307,72 @@
                     <tr>
                         <th>브랜드</th>
                         <td>
-                        	<select name="btag">
-								<option value="${requestScope.brand.btag == '0' }">삼성</option>
-								<option value="${requestScope.brand.btag == '1' }">애플</option>
-								<option value="${requestScope.brand.btag == '2' }">LG</option>
-								<option value="${requestScope.brand.btag == '3' }">기타</option>
+                        	<select name="btag" id="btag">
+								<option value="삼성">삼성</option>
+								<option value="애플">애플</option>
+								<option value="LG">LG</option>
+								<option value="기타">기타</option>
 							</select>
                         </td>
                     </tr>
                     <tr>
                         <th>모델명</th>
-                        <td><input type="text" name="product" value="${requestScope.board.model }"></td>
+                        <td><input type="text" name="model" id="model"></td>
                     </tr>
                     <tr>
                         <th>통신사</th>
                         <td>
-                        	<select name="atag">
-								<option value="${requestScope.agency.atag == '0' }">SKT</option>
-								<option value="${requestScope.agency.atag == '1' }">KT</option>
-								<option value="${requestScope.agency.atag == '2' }">LG U+</option>
-								<option value="${requestScope.agency.atag == '3' }">자급제</option>
-								<option value="${requestScope.agency.atag == '4' }">WIFI,미지원</option>
+                        	<select name="atag" id="atag">
+								<option value="SKT">SKT</option>
+								<option value="KT">KT</option>
+								<option value="LG U+">LG U+</option>
+								<option value="자급제">자급제</option>
+								<option value="WIFI,미지원">WIFI,미지원</option>
 							</select>
                         </td>
                     </tr>
                     <tr>
                         <th>제품분류</th>
                         <td>
-                        	<select name="ctag">
-								<option value="${requestScope.classification.ctag == '0' }">5G</option>
-								<option value="${requestScope.classification.ctag == '1' }">4G</option>
-								<option value="${requestScope.classification.ctag == '2' }">3G</option>
-								<option value="${requestScope.classification.ctag == '3' }">2G</option>
-								<option value="${requestScope.classification.ctag == '4' }">애플OS</option>
-								<option value="${requestScope.classification.ctag == '5' }">안드로이드</option>
+                        	<select name="ctag" id="ctag">
+								<option value="5G">5G</option>
+								<option value="4G">4G</option>
+								<option value="3G">3G</option>
+								<option value="2G">2G</option>
+								<option value="애플OS">애플OS</option>
+								<option value="안드로이드">안드로이드</option>
 							</select>
 						</td>
                     </tr>
                     <tr>
                         <th>제품상태</th>
                         <td>
-                        	<select name="ptag">
-								<option value="${requestScope.pro_status.ptag == '0' }">신품(미사용)</option>
-								<option value="${requestScope.pro_status.ptag == '1' }">상태(상)</option>
-								<option value="${requestScope.pro_status.ptag == '2' }">상태(중)</option>
-								<option value="${requestScope.pro_status.ptag == '3' }">상태(하)</option>
-								<option value="${requestScope.pro_status.ptag == '4' }">확정기변</option>
-								<option value="${requestScope.pro_status.ptag == '5' }">유심기변</option>
-								<option value="${requestScope.pro_status.ptag == '6' }">요금할인</option>
-								<option value="${requestScope.pro_status.ptag == '7' }">보증기간이내</option>
-								<option value="${requestScope.pro_status.ptag == '8' }">풀박스</option>
-								<option value="${requestScope.pro_status.ptag == '9' }">일부 누락</option>
-								<option value="${requestScope.pro_status.ptag == '10' }">단품</option>
+                        	<select name="ptag" id="ptag">
+								<option value="신품(미사용)">신품(미사용)</option>
+								<option value="상태(상)">상태(상)</option>
+								<option value="상태(중)">상태(중)</option>
+								<option value="상태(하)">상태(하)</option>
+								<option value="확정기변">확정기변</option>
+								<option value="유심기변">유심기변</option>
+								<option value="6">요금할인</option>
+								<option value="7">보증기간이내</option>
+								<option value="8">풀박스</option>
+								<option value="9">일부 누락</option>
+								<option value="10">단품</option>
 							</select>
                         </td>
                     </tr>
                     <tr class="total">
                         <th>판매금액</th>
-                        <td><input type="number" name="price" value="${requestScope.board.price }">원</td>
+                        <td><input type="number" name="price" id="price">원</td>
+                    </tr>
+                     <tr>
+                        <th>판매상태</th>
+	                        <td><select name="trade" id="trade">
+									<option value="0">판매중</option>
+									<option value="1">판매완료</option>
+								</select>
+							</td>
                     </tr>
             </table>
         </div>
@@ -376,7 +389,7 @@
             <table class="minfo">
                 <tr>
                     <th>아이디</th>
-                    <td><input type="text" name="id" ></td>
+                    <td id="id">${client.id }</td>
                     <th>전체거래</th>
                     <td><input type="hidden" name="alldeal" ></td>
                     <th>판매취소</th>

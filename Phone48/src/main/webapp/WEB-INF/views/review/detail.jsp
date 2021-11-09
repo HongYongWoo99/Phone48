@@ -41,7 +41,13 @@
         border-radius: 15px;
         text-decoration: none;
     }
-
+	section{
+       display: flex;
+       flex-direction: column;
+       background-color: #DCF1ED;
+       font-size: 20px;
+       font-weight: bold;
+   }
     footer {
         background-color: #FFFFC9;
 
@@ -154,13 +160,14 @@
         <a href="#" class="h_tag">고객센터</a>
         <a href="#" class="h_tag">로그아웃</a>
     </header>
-    <section class="section_container">
+    <section >
+    <div class="section_container">
         <div id="nickname">
             <img src="" alt=""> 닉네임 : ${client.nickname}
         </div>
         <div id="state_container">
-            <div id="title">${detail.title}</div>
-            <div id="write_date">2021.09.23</div>
+            <div id="title">제목 : ${detail.title}</div>
+            <div id="write_date">작성일 : 2021.09.23</div>
         </div>
 
         <div class="title_container">
@@ -177,7 +184,7 @@
         <div class="btn"> <a href="reviewUpdateView.do?rno=${requestScope.detail.rno}">수정</a>
        		 <a href="reviewDelete.do?rno=${requestScope.detail.rno}">삭제</a>
        	 </div>
-         
+    </div>     
     </section>
     <footer>
         <div class="footer_tag">

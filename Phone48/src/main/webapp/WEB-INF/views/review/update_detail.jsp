@@ -41,6 +41,12 @@
         border-radius: 15px;
         text-decoration: none;
     }
+    section{
+       display: flex;
+       flex-direction: column;
+       background-color: #DCF1ED;
+       
+   }
 
     footer {
         background-color: #FFFFC9;
@@ -91,8 +97,15 @@
     .section_container {
         width: 1200px;
         margin: 40px auto;
+        font-size: 20px;
+        font-weight: bold;
     }
-
+    input{
+    	 font-size: 20px;
+    }
+	textarea{
+		font-size: 20px;
+	}
     #nickname {
         width: 1200px;
         font-size: 20px;
@@ -157,14 +170,15 @@
         <a href="#" class="h_tag">고객센터</a>
         <a href="#" class="h_tag">로그아웃</a>
     </header>
-    <section class="section_container">
-	<form action="reviewUpdate.do" method="post">
+    <section >
+    <div class="section_container">
+	<form action="reviewUpdate.do" method="post" >
 		<div id="review_point">
         	제목 : <input type="text" name="title" value="${requestScope.review.title}">
         </div>
         <div id="state_container">
             <div id="title">아이디 : ${requestScope.review.id}</div>
-            <div id="write_date">2021.09.23</div>
+            <div id="write_date">작성일 : 2021.09.23</div>
         </div>
         <div id="review_point">
             평점 : <input type="number" name="review_point" value="${requestScope.review.review_point}">
@@ -175,6 +189,7 @@
 		<button type="button" onclick="history.back();">취소</button></div>
 		<input type="hidden" name="rno" value="${requestScope.review.rno}">
      </form>
+     </div>
      </section>
     <footer>
         <div class="footer_tag">

@@ -13,6 +13,15 @@ public class FileDTO {
 	private String originfilename;
 	private String type;
 	private String url;
+	private String nickname;
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 
 	public FileDTO() {
 	}
@@ -85,6 +94,8 @@ public class FileDTO {
 	public void seturl(String url) {
 		this.url = url;
 	}
+
+	
 
 	
 }

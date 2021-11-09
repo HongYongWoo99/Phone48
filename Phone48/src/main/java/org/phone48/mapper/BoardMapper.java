@@ -54,5 +54,7 @@ public interface BoardMapper {
 
 		int deleteReview(int rno);
 		//----------------------CHOI
+
+		BoardDTO boardDetail(int bno);
 		
 }

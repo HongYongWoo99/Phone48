@@ -86,19 +86,11 @@ public class MainController {
 	}
 	
 	@RequestMapping("boardView.do")
-	public String boardView(HttpServletRequest request,HttpSession session) {
-		int bno = Integer.parseInt(request.getParameter("bno"));
-		boardService.addBoardCount(bno);
-		BoardDTO dto = boardService.selectBoardContent(bno);
-		request.setAttribute("board", dto);
-
-		// 파일목록
-		ArrayList<FileDTO> flist = boardService.selectFileList(bno);
-		request.setAttribute("flist", flist);
+	public String boardView(@RequestParam("bno") int bno, Model model) {
+		model.addAttribute("bdetail", boardService.boardDetailService(bno));
 
 		return "board/board_view";
 	}
-
 	
 	@RequestMapping("memberUpdateView.do")
 	public String memberUpdateView(HttpSession session) {
@@ -133,10 +125,19 @@ public class MainController {
 	public String boardWrite(MultipartHttpServletRequest request, HttpSession session)
 			throws UnsupportedEncodingException {
 
+		String id = ((MemberDTO) session.getAttribute("client")).getId();
 		String title = request.getParameter("title");
+		int price = Integer.parseInt(request.getParameter("price"));
 		String content = request.getParameter("content");
 		String nickname = ((MemberDTO) session.getAttribute("client")).getNickname();
-		int bno = boardService.insertBoard(new BoardDTO(0, null, nickname, 0, title, content, 0, '0',  bno, bno, bno, bno, bno));//오라클에 char(1), dto boolean으로 설정
+		String btag = request.getParameter("btag");
+		String atag = request.getParameter("atag");
+		String model = request.getParameter("model");
+		String ctag = request.getParameter("ctag");
+		String ptag = request.getParameter("ptag");
+		int trade = Integer.parseInt(request.getParameter("trade"));
+		
+		int bno = boardService.insertBoard(new BoardDTO(0, id, nickname, trade,title,content,btag,atag,model,ctag,ptag,price));
 		// 업로드한 파일 목록
 		System.out.println(request.getParameterMap());
 		List<MultipartFile> fileList = request.getFiles("file");
@@ -300,7 +301,7 @@ public class MainController {
 				}
 				@RequestMapping("myPage.do")
 				public String myPage() {
-					return "MyPage";
+					return "my_page";
 				}
 				//---------------------------------------------CHOI
 		//---------------------------------------------Lee
