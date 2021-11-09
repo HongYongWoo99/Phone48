@@ -304,7 +304,7 @@ footer {
 <body>
 	<header>
 		<h1>Phone 48</h1>
-		<a href="#" class="h_tag">게시글</a> <a href=""reviewList.do"" class="h_tag">리뷰</a> <a
+		<a href="#" class="h_tag">게시글</a> <a href="reviewList.do" class="h_tag">리뷰</a> <a
 			href="#" class="h_tag">마이페이지</a> <a href="#" class="h_tag">고객센터</a> <a
 			href="#" class="h_tag">로그아웃</a>
 	</header>
@@ -315,13 +315,13 @@ footer {
 			</div>
 			<hr>
 			<div class="picture">
-				<img src="" alt=""
+				<img src="image/iphone_1.jpg" alt=""
 					name="product_main" class="pmain"> <img
-					src="" alt=""
+					src="image/iphone_2.jpg" alt=""
 					name="product_sub1" class="psub1"> <img
-					src="" alt=""
+					src="image/iphone_3.jpg" alt=""
 					name="product_sub2" class="psub2"> <img
-					src="" alt=""
+					src="image/iphone_4.jpg" alt=""
 					name="product_sub3" class="psub3">
 			</div>
 			<div class="product">

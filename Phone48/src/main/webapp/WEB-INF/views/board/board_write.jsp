@@ -296,10 +296,10 @@
         <hr>
         <div class="picture" name="picture">
             
-            <img src="" alt="" name="product_main" class="pmain">
-            <img src="" alt="" name="product_sub1" class="psub1">
-            <img src="" alt="" name="product_sub2" class="psub2">
-            <img src="" alt="" name="product_sub3" class="psub3">
+            <img src="image/iphone_1.jpg" alt="" name="product_main" class="pmain">
+            <img src="image/iphone_2.jpg" alt="" name="product_sub1" class="psub1">
+            <img src="image/iphone_3.jpg" alt="" name="product_sub2" class="psub2">
+            <img src="image/iphone_4.jpg" alt="" name="product_sub3" class="psub3">
             
         </div>
         <div class="product">
@@ -354,11 +354,11 @@
 								<option value="상태(하)">상태(하)</option>
 								<option value="확정기변">확정기변</option>
 								<option value="유심기변">유심기변</option>
-								<option value="6">요금할인</option>
-								<option value="7">보증기간이내</option>
-								<option value="8">풀박스</option>
-								<option value="9">일부 누락</option>
-								<option value="10">단품</option>
+								<option value="요금할인">요금할인</option>
+								<option value="보증기간이내">보증기간이내</option>
+								<option value="풀박스">풀박스</option>
+								<option value="일부 누락">일부 누락</option>
+								<option value="단품">단품</option>
 							</select>
                         </td>
                     </tr>

@@ -324,13 +324,13 @@ footer {
 				</div>
 				<hr>
 				<div class="picture">
-					<img src="${requestScope.board_file_list.path }" alt=""
+					<img src="image/iphone_1.jpg" alt=""
 						name="product_main" class="pmain"> <img
-						src="${requestScope.board_file_list.path }" alt=""
+						src="image/iphone_2.jpg" alt=""
 						name="product_sub1" class="psub1"> <img
-						src="${requestScope.board_file_list.path }" alt=""
+						src="image/iphone_3.jpg" alt=""
 						name="product_sub2" class="psub2"> <img
-						src="${requestScope.board_file_list.path }" alt=""
+						src="image/iphone_4.jpg" alt=""
 						name="product_sub3" class="psub3">
 				</div>
 				<div class="product">
