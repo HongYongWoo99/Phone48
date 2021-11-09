@@ -195,7 +195,7 @@ label {
 .cancel {
 	width: 160px;
 	height: 50px;
-	margin-left: 20px;
+	margin-left: 10px;
 	background-color: #00C2FF;
 	color: white;
 	border: 1px solid #00C2FF;
