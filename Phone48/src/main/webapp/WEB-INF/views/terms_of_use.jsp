@@ -221,9 +221,9 @@ footer {
 <body>
 	<header>
 		<h1>Phone 48</h1>
-		<a href="#" class="h_tag">게시글</a> <a href="#" class="h_tag">리뷰</a> <a
-			href="#" class="h_tag">마이페이지</a> <a href="#" class="h_tag">고객센터</a> <a
-			href="#" class="h_tag">로그아웃</a>
+		<a href="boardList.do" class="h_tag">게시글</a> <a href="reviewList.do" class="h_tag">리뷰</a> <a
+			href="myPage.do" class="h_tag">마이페이지</a> <a href="customerCenter.do" class="h_tag">고객센터</a> <a
+			href="logout.do" class="h_tag">로그아웃</a>
 	</header>
 	<section>
 		<div class="terms_container">
@@ -260,7 +260,7 @@ footer {
 					<span>[필수]</span> 개인정보처리방침에 동의합니다.
 				</p>
 			</div>
-			<button id="btn_agreement_next">다음</button>
+			<button id="btn_agreement_next"><a href="register.do">다음</a></button>
 		</div>
 	</section>
 	<footer>

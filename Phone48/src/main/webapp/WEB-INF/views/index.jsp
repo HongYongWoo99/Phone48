@@ -185,9 +185,10 @@ td {
 	</c:if>
 	<header>
 		<h1>Phone 48인덱스</h1>
-		<a href="#" class="h_tag">게시글</a> <a href="#" class="h_tag">리뷰</a> <a
-			href="#" class="h_tag">마이페이지</a> <a href="#" class="h_tag">고객센터</a> <a
-			href="#" class="h_tag">로그아웃</a>
+		<a href="boardList.do" class="h_tag">게시글</a> <a href="reviewList.do"
+			class="h_tag">리뷰</a> <a href="myPage.do" class="h_tag">마이페이지</a> <a
+			href="customerCenter.do" class="h_tag">고객센터</a> <a href="/"
+			class="h_tag">로그인</a>
 	</header>
 	<section>
 		<div class="login_container">
@@ -224,7 +225,7 @@ td {
 					<tr class="register_bar">
 						<td><a href="#">아이디 찾기</a></td>
 						<td><a href="#">비빌번호 재설정</a></td>
-						<td><a href="#">회원가입</a></td>
+						<td><a href="termsOfUse.do">회원가입</a></td>
 					</tr>
 				</table>
 			</form>

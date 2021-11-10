@@ -145,11 +145,9 @@
 <body>
     <header>
         <h1>Phone 48</h1>
-        <a href="#" class="h_tag">게시글</a>
-        <a href="#" class="h_tag">리뷰</a>
-        <a href="#" class="h_tag">마이페이지</a>
-        <a href="#" class="h_tag">고객센터</a>
-        <a href="#" class="h_tag">로그아웃</a>
+		<a href="boardList.do" class="h_tag">게시글</a> <a href="reviewList.do" class="h_tag">리뷰</a> <a
+			href="myPage.do" class="h_tag">마이페이지</a> <a href="customerCenter.do" class="h_tag">고객센터</a> <a
+			href="logout.do" class="h_tag">로그아웃</a>
     </header>
     <section>
     <div class="container">
@@ -175,10 +173,10 @@
                             <td><a href="#" >나의 판매 내역확인</a></td>
                         </tr>
                         <tr>
-                            <td><a href="#">나의 구매 내역확인</a></td>
+                            <td><a href="buyList.do">나의 구매 내역확인</a></td>
                         </tr>
                         <tr>
-                            <td><a href="#">회원정보 변경</a></td>
+                            <td><a href="memberUpdateView.do">회원정보 변경</a></td>
                         </tr>
                         <tr>
                             <td><a href="#">회원탈퇴</a></td>

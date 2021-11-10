@@ -304,9 +304,10 @@ footer {
 <body>
 	<header>
 		<h1>Phone 48</h1>
-		<a href="#" class="h_tag">게시글</a> <a href="#" class="h_tag">리뷰</a> <a
-			href="#" class="h_tag">마이페이지</a> <a href="#" class="h_tag">고객센터</a> <a
-			href="#" class="h_tag">로그아웃</a>
+		<a href="boardList.do" class="h_tag">게시글</a> <a href="reviewList.do"
+			class="h_tag">리뷰</a> <a href="myPage.do" class="h_tag">마이페이지</a> <a
+			href="customerCenter.do" class="h_tag">고객센터</a> <a href="logout.do"
+			class="h_tag">로그아웃</a>
 	</header>
 	<section>
 		<article>
@@ -324,14 +325,12 @@ footer {
 				</div>
 				<hr>
 				<div class="picture">
-					<img src="image/iphone_1.jpg" alt=""
-						name="product_main" class="pmain"> <img
-						src="image/iphone_2.jpg" alt=""
+					<img src="image/iphone_1.jpg" alt="" name="product_main"
+						class="pmain"> <img src="image/iphone_2.jpg" alt=""
 						name="product_sub1" class="psub1"> <img
-						src="image/iphone_3.jpg" alt=""
-						name="product_sub2" class="psub2"> <img
-						src="image/iphone_4.jpg" alt=""
-						name="product_sub3" class="psub3">
+						src="image/iphone_3.jpg" alt="" name="product_sub2" class="psub2">
+					<img src="image/iphone_4.jpg" alt="" name="product_sub3"
+						class="psub3">
 				</div>
 				<div class="product">
 
