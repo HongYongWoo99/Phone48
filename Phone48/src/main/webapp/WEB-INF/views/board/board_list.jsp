@@ -428,7 +428,7 @@ footer {
 				<td colspan="7"><c:if
 						test="${requestScope.pagging.priviousPageGroup }">
 						<a
-							href="boardList.do?pageNo=${requestScope.pagging.startPageOfPageGroup-1 }"></a>
+							href="boardList.do?pageNo=${requestScope.pagging.startPageOfPageGroup-1 }"><<</a>
 					</c:if> <c:forEach var="i"
 						begin="${requestScope.pagging.startPageOfPageGroup}"
 						end="${requestScope.pagging.endPageOfPageGroup}">
